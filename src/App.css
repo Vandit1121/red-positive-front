@@ -1,0 +1,236 @@
+*{
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+  
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+/* .App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+} */
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Navbar */
+
+nav{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items:  center;
+  background-color: #f8b8d543 !important;
+}
+
+.navbar-h2{
+  color: rgb(248, 79, 79) !important;
+  font-weight: bold;
+}
+
+nav ul{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+nav ul li{
+  list-style-type: none;
+  padding: 10% 20%;
+  
+}
+
+.navbar-links{
+  text-decoration: none;
+  font-size: 110%;
+  color: rgb(248, 79, 79)  !important;
+  font-weight: bold;
+}
+
+.links{
+  margin: 0rem 1.5rem ;
+  margin-right: 10%;
+  padding-right: 10%;
+}
+
+table, th, td {
+  border:1px solid black;
+}
+
+/* Main Section */
+
+.coloured-section{
+  background-color: #f8b8d544;
+  /* width: 100%; */
+}
+
+.big-heading{
+  font-family: 'Montserrat',sans-serif;
+  color: rgb(248, 79, 79);
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+.text{
+  /* text-align: left; */
+  padding-top: 15%;
+  width: 50%;
+  /* padding-right: 60%; */
+  /* font-size:xx-large; */
+}
+
+.download-btn{
+  margin: 10% 3% 5% 0;
+  padding: 10px 50px !important;
+ color: white;
+ background-color: rgb(248, 121, 121);
+ border: none;
+ border-radius: 10px; 
+ font-weight: bold;
+ font-size:larger;
+}
+
+.animation{
+    /* padding-left: 20%; */
+    margin-left: 15%;
+    width: 75%;
+}
+
+
+/* Form */
+
+.popup {
+  /* position: fixed; */
+  width: 500px;
+  height: 50%;
+  padding: 20px 30px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px 700px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+.popup .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  /* width: 20px;
+  height: 20px; */
+  background: rgb(248, 79, 79);
+  color:  #fff;
+  text-align: center;
+  line-height: 15px;
+  border-radius: 100%;
+  border-color:  rgb(248, 79, 79);
+  cursor: pointer;
+}
+
+.popup .form {
+  /* text-align: center; */
+  color: rgb(248, 79, 79);
+  margin: 10px 0px 20px;
+  font-size: 1.2rem;
+}
+
+.popup .form h2 {
+  text-align: center;
+  margin: 3% 0%;
+  font-weight: bold;
+}
+
+.popup .form .form-element {
+  margin: 15px 0px;
+}
+
+.popup .form .form-element label {
+  font-size: 1.2rem;
+  color:  rgb(248, 79, 79);
+  font-weight: bold;
+  margin-top: 5%;
+}
+
+.form-input{
+  /* margin-top: 5px; */
+  margin-bottom: 5%;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: 1px solid  black;
+  border-radius: 5px;
+}
+
+/* .form-input::placeholder{
+  color:  rgb(248, 79, 79);
+  opacity: 1;
+} */
+
+.popup .form .form-element button {
+  width: 100%;
+  height: 40px;
+  margin-top: 4%;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background:  rgb(248, 79, 79);
+  color: #f5f5f5;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* table */
+
+table{
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-bottom: -7%;
+  font-family: arial, sans-serif;
+  width: 70%;
+
+}
+
+td, th {
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+  text-align: center;
+  border-color: rgb(255, 111, 111);
+
+}
+
+th{
+  background-color:rgb(255, 111, 111) ;
+  color: white;
+}
