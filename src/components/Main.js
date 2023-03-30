@@ -30,7 +30,7 @@ function Main() {
     }
 
     const sendMail=async(content)=> {
-        let res = await fetch(`${process.env.URL}sendEmail`, {
+        let res = await fetch(`${process.env.HOME_URL}sendEmail`, {
             method: 'post',
             body: JSON.stringify(content),
             headers: {
@@ -48,7 +48,7 @@ function Main() {
     }
 
     const getApiData = async () => {
-        const res = await Axios.get(`${process.env.URL}`);
+        const res = await Axios.get(`${process.env.HOME_URL}`);
         setMyDetails(res.data);
     }
     useEffect(() => {
@@ -61,7 +61,7 @@ function Main() {
 
     const collectData = async () => {
         console.log(name, phoneNumber, email, hobbies);
-        Axios.post(`${process.env.URL}sendDetails`,{name, phoneNumber, email, hobbies}).then(function (response) {
+        Axios.post(`${process.env.HOME_URL}sendDetails`,{name, phoneNumber, email, hobbies}).then(function (response) {
             console.log(response);
           })
           .catch(function (error) {
