@@ -30,7 +30,7 @@ function Main() {
     }
 
     const sendMail=async(content)=> {
-        let res = await fetch("http://localhost:5000/sendEmail", {
+        let res = await fetch(`${process.env.URL}sendEmail`, {
             method: 'post',
             body: JSON.stringify(content),
             headers: {
@@ -44,11 +44,11 @@ function Main() {
         //   .catch(function (error) {
         //     console.log(error);
         //   });
-        // refreshPage();
+        refreshPage();
     }
 
     const getApiData = async () => {
-        const res = await Axios.get('http://localhost:5000/');
+        const res = await Axios.get(`${process.env.URL}`);
         setMyDetails(res.data);
     }
     useEffect(() => {
@@ -61,7 +61,7 @@ function Main() {
 
     const collectData = async () => {
         console.log(name, phoneNumber, email, hobbies);
-        Axios.post('http://localhost:5000/sendDetails',{name, phoneNumber, email, hobbies}).then(function (response) {
+        Axios.post(`${process.env.URL}sendDetails`,{name, phoneNumber, email, hobbies}).then(function (response) {
             console.log(response);
           })
           .catch(function (error) {
