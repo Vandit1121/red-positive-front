@@ -3,11 +3,13 @@ import Axios from 'axios';
 import Popup from 'reactjs-popup';
 import Lottie from "lottie-react";
 import data from "./data.json";
-import axios from "axios";
+// import Axios from "axios";
 // require('dotenv').config();
 
 // import getApiData from "./Table.";
 // import Table from "./Table.";
+
+const HOME_URL = "https://red-positive-back.vercel.app/"
 
 function Main() {
     const [name, setName] = useState("");
@@ -30,7 +32,7 @@ function Main() {
     }
 
     const sendMail=async(content)=> {
-        let res = await fetch(`${process.env.HOME_URL}sendEmail`, {
+        let res = await fetch(`${HOME_URL}sendEmail`, {
             method: 'post',
             body: JSON.stringify(content),
             headers: {
@@ -48,7 +50,8 @@ function Main() {
     }
 
     const getApiData = async () => {
-        const res = await Axios.get(`${process.env.HOME_URL}`);
+        console.log(HOME_URL);
+        const res = await Axios.get(`${HOME_URL}`);
         setMyDetails(res.data);
     }
     useEffect(() => {
@@ -61,7 +64,7 @@ function Main() {
 
     const collectData = async () => {
         console.log(name, phoneNumber, email, hobbies);
-        Axios.post(`${process.env.HOME_URL}sendDetails`,{name, phoneNumber, email, hobbies}).then(function (response) {
+        Axios.post(`${HOME_URL}sendDetails`,{name, phoneNumber, email, hobbies}).then(function (response) {
             console.log(response);
           })
           .catch(function (error) {
