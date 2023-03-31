@@ -25,7 +25,7 @@ function Main() {
         validationSchema: dataSchema,
         onSubmit: (values) => {
             console.log(values.name, values.phoneNumber, values.email, values.hobbies);
-            Axios.post(`${HOME_URL}sendDetails`, {name:values.name, phoneNumber:values.phoneNumber, email:values.email, hobbies:values.hobbies }).then(function (response) {
+            Axios.post(`${HOME_URL}sendDetails`, { name: values.name, phoneNumber: values.phoneNumber, email: values.email, hobbies: values.hobbies }).then(function (response) {
                 console.log(response);
             })
                 .catch(function (error) {
