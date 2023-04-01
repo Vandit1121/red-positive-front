@@ -7,7 +7,8 @@ import { useFormik } from "formik";
 import { dataSchema } from "../schemas/dataValidation";
 
 
-const HOME_URL = "https://red-positive-back.vercel.app/"
+// const HOME_URL = "https://red-positive-back.vercel.app/"
+const HOME_URL = "http://localhost:5000/"
 
 const initialValues = {
     name: "",
@@ -71,6 +72,17 @@ function Main() {
         getApiData();
     }, []);
 
+    function deleteData(e){
+        const item = e.target.value;
+        Axios.post(`${HOME_URL}deleteData`,{_id:item}).then((response)=>{
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
+        // refreshPage();
+
+    }
+
     function refreshPage() {
         window.location.reload(false);
     }
@@ -129,6 +141,7 @@ function Main() {
                     <th>Phone Number</th>
                     <th>Email</th>
                     <th>Hobbies</th>
+                    <th>Delete</th>
                 </tr>
                 <tbody>
                     {myDetails.map((myDetail, index) => {
@@ -140,6 +153,7 @@ function Main() {
                                 <td>{myDetail.phoneNumber}</td>
                                 <td>{myDetail.email}</td>
                                 <td>{myDetail.hobbies}</td>
+                                <td><button className="forTable" onClick={deleteData} value={myDetail._id}>Delete</button></td>
                             </tr>
                         )
                     })}
