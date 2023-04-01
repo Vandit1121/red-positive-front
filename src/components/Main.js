@@ -7,17 +7,23 @@ import { useFormik } from "formik";
 import { dataSchema } from "../schemas/dataValidation";
 
 
-const HOME_URL = "https://red-positive-back.vercel.app/"
-// const HOME_URL = "http://localhost:5000/"
+// const HOME_URL = "https://red-positive-back.vercel.app/"
+const HOME_URL = "http://localhost:5000/"
 
-const initialValues = {
+let initialValues = {
+    id: "null",
     name: "",
     phoneNumber: "",
     email: "",
-    hobbies: "",
+    hobbies: ""
 }
 
 function Main() {
+    const[check,setCheck]=useState(0);
+    // const [name, setName] = useState("");
+    // const [phoneNumber, setPhoneNumber] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [hobbies, setHobbies] = useState("");
     const [myDetails, setMyDetails] = useState([]);
     const [myData, setMyData] = useState([]);
 
@@ -25,18 +31,16 @@ function Main() {
         initialValues: initialValues,
         validationSchema: dataSchema,
         onSubmit: (values) => {
-            console.log(values.name, values.phoneNumber, values.email, values.hobbies);
-            Axios.post(`${HOME_URL}sendDetails`, { name: values.name, phoneNumber: values.phoneNumber, email: values.email, hobbies: values.hobbies }).then(function (response) {
-                console.log(response);
-            })
+            
+                Axios.post(`${HOME_URL}sendDetails`, { _id:values.id,name: values.name, phoneNumber: values.phoneNumber, email: values.email, hobbies: values.hobbies }).then(function (response) {
+                    console.log(response);
+                })
                 .catch(function (error) {
                     console.log(error);
                 });
-            // close();
-            refreshPage();
+                refreshPage();
             console.log(errors);
-        }
-
+        },
     });
 
     function addData(e) {
@@ -72,17 +76,23 @@ function Main() {
         getApiData();
     }, []);
 
-    function deleteData(e){
+    function deleteData(e) {
         const item = e.target.value;
-        Axios.post(`${HOME_URL}deleteData`,{_id:item}).then((response)=>{
+        Axios.post(`${HOME_URL}deleteData`, { _id: item }).then((response) => {
             console.log(response);
         }).catch(function (error) {
             console.log(error);
         });
-        // refreshPage();
-
+        refreshPage();
     }
 
+    const settingData = async(e)=>{
+        values.name=e.name;
+        values.email=e.email;
+        values.phoneNumber=e.phoneNumber;
+        values.hobbies=e.hobbies;
+        setCheck(1);
+    }
     function refreshPage() {
         window.location.reload(false);
     }
@@ -100,22 +110,23 @@ function Main() {
                                 close => (
                                     <div className="popup">
                                         <button className="close-btn" onClick=
-                                            {() => close()}>
+                                            {() => {
+                                                close();
+                                            }}>
                                             &times;
                                         </button>
                                         <div className="form">
                                             <h2>New User</h2>
                                             <div className="form-element">
-
                                                 <form onSubmit={handleSubmit}>
                                                     <label htmlFor="name">Name</label>{errors.name && touched.name ? <p className="form-error">{errors.name}</p> : null}
-                                                    <input className="form-input" id="name" type="text" placeholder="Enter your name" name="name" value={values.name} onChange={handleChange} onBlur={handleBlur} />
+                                                    <input className="form-input" id="name" type="text" placeholder="Enter your name" name="name" value={values.name} onChange={handleChange} onBlur={handleBlur} required/>
                                                     <label htmlFor="phoneNumber">Phone Number</label>{errors.phoneNumber && touched.phoneNumber ? <p className="form-error">{errors.phoneNumber}</p> : null}
-                                                    <input className="form-input" id="phoneNumber" type="tel" placeholder="Enter your phone number" name="phoneNumber" value={values.phoneNumber} onChange={handleChange} onBlur={handleBlur}></input>
+                                                    <input className="form-input" id="phoneNumber" type="tel" placeholder="Enter your phone number" name="phoneNumber" value={values.phoneNumber} onChange={handleChange} onBlur={handleBlur} required></input>
                                                     <label htmlFor="email">Email</label>{errors.email && touched.email ? <p className="form-error">{errors.email}</p> : null}
-                                                    <input className="form-input" id="email" type="email" placeholder="Enter your e-mail" name="email" value={values.email} onChange={handleChange} onBlur={handleBlur}></input>
+                                                    <input className="form-input" id="email" type="email" placeholder="Enter your e-mail" name="email" value={values.email} onChange={handleChange} onBlur={handleBlur} required></input>
                                                     <label htmlFor="hobbies">Hobbies</label>{errors.hobbies && touched.hobbies ? <p className="form-error">{errors.hobbies}</p> : null}
-                                                    <input className="form-input" id="hobbies" type="hobbies" placeholder="Tell us about your hobbies" name="hobbies" value={values.hobbies} onChange={handleChange} onBlur={handleBlur}></input>
+                                                    <input className="form-input" id="hobbies" type="hobbies" placeholder="Tell us about your hobbies" name="hobbies" value={values.hobbies} onChange={handleChange} onBlur={handleBlur} required></input>
                                                     {/* <div onClick={collectData}> */}
                                                     <button type="submit" >Save</button>
                                                 </form>
@@ -131,8 +142,8 @@ function Main() {
                     <div class="col-lg-6 ">
                         <Lottie animationData={data} loop={true} className="animation" />
                     </div>
-                </div>
-            </section>
+                </div >
+            </section >
             <table>
                 <tr>
                     <th>Checkbox</th>
@@ -141,6 +152,7 @@ function Main() {
                     <th>Phone Number</th>
                     <th>Email</th>
                     <th>Hobbies</th>
+                    <th>Update</th>
                     <th>Delete</th>
                 </tr>
                 <tbody>
@@ -153,6 +165,38 @@ function Main() {
                                 <td>{myDetail.phoneNumber}</td>
                                 <td>{myDetail.email}</td>
                                 <td>{myDetail.hobbies}</td>
+                                <td><Popup trigger={<button id='addDetails' className="forTable">Update</button>}
+                                    modal nested>{
+                                        close => (
+                                            <div className="popup">
+                                                <button className="close-btn" onClick=
+                                                    {() => {
+                                                        close();
+                                                    }}>
+                                                    &times;
+                                                </button>
+                                                <div className="form">
+                                                    <h2>New User</h2>
+                                                    <div className="form-element">
+                                                        <form onSubmit={handleSubmit}>
+                                                            <label htmlFor="name">Name</label>{errors.name && touched.name ? <p className="form-error">{errors.name}</p> : null}
+                                                            <input className="form-input" id="name" type="text" name="name" defaultValue={myDetail.name} onClick={()=>{check===0? settingData(myDetail):console.log("nothing")}} onChange={(e)=>{values.name=e.target.value}} onBlur={handleBlur} required/>
+                                                            <label htmlFor="phoneNumber">Phone Number</label>{errors.phoneNumber && touched.phoneNumber ? <p className="form-error">{errors.phoneNumber}</p> : null}
+                                                            <input className="form-input" id="phoneNumber" type="tel" name="phoneNumber" onClick={()=>{check===0? settingData(myDetail):console.log("nothing")}} defaultValue={myDetail.phoneNumber} onChange={(e)=>{values.phoneNumber=e.target.value}} onBlur={handleBlur} required></input>
+                                                            <label htmlFor="email">Email</label>{errors.email && touched.email ? <p className="form-error">{errors.email}</p> : null}
+                                                            <input className="form-input" id="email" type="email" name="email" onClick={()=>{check===0? settingData(myDetail):console.log("nothing")}} defaultValue={myDetail.email} onChange={(e)=>{values.email=e.target.email}} onBlur={handleBlur} required></input>
+                                                            <label htmlFor="hobbies">Hobbies</label>{errors.hobbies && touched.hobbies ? <p className="form-error">{errors.hobbies}</p> : null}
+                                                            <input className="form-input" id="hobbies" type="hobbies" name="hobbies" onClick={()=>{check===0? settingData(myDetail):console.log("nothing")}} defaultValue={myDetail.hobbies} onChange={(e)=>{values.hobbies=e.target.value}} onBlur={handleBlur} required></input>
+                                                            {/* <div onClick={collectData}> */}
+                                                            <button type="submit" onClick={()=>{check===0? settingData(myDetail) :console.log("nothing"); values.id=myDetail._id}}>Update</button>
+                                                        </form>
+                                                        {/* </div> */}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                </Popup></td>
                                 <td><button className="forTable" onClick={deleteData} value={myDetail._id}>Delete</button></td>
                             </tr>
                         )
@@ -160,7 +204,7 @@ function Main() {
                 </tbody>
             </table>
             <button className="btn btn-dark btn-lg download-btn" onClick={filter}>Send</button>
-        </div>
+        </div >
     );
 }
 
