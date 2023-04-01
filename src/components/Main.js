@@ -7,8 +7,8 @@ import { useFormik } from "formik";
 import { dataSchema } from "../schemas/dataValidation";
 
 
-// const HOME_URL = "https://red-positive-back.vercel.app/"
-const HOME_URL = "http://localhost:5000/"
+const HOME_URL = "https://red-positive-back.vercel.app/"
+// const HOME_URL = "http://localhost:5000/"
 
 let initialValues = {
     id: "null",
@@ -20,10 +20,6 @@ let initialValues = {
 
 function Main() {
     const[check,setCheck]=useState(0);
-    // const [name, setName] = useState("");
-    // const [phoneNumber, setPhoneNumber] = useState("");
-    // const [email, setEmail] = useState("");
-    // const [hobbies, setHobbies] = useState("");
     const [myDetails, setMyDetails] = useState([]);
     const [myData, setMyData] = useState([]);
 
