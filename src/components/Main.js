@@ -29,7 +29,7 @@ function Main() {
         validationSchema: dataSchema,
         onSubmit: async (values) => {
 
-            Axios.post(`${HOME_URL}sendDetails`, { _id: values.id, name: values.name, phoneNumber: values.phoneNumber, email: values.email, hobbies: values.hobbies }, { timeout: 200 }).then(function (response) {
+            await Axios.post(`${HOME_URL}sendDetails`, { _id: values.id, name: values.name, phoneNumber: values.phoneNumber, email: values.email, hobbies: values.hobbies }, { timeout: 2000 }).then(function (response) {
                 console.log(response);
             })
                 .catch(function (error) {
@@ -82,7 +82,7 @@ function Main() {
 
     const deleteData = async (e) => {
         const item = e.target.value;
-        await Axios.post(`${HOME_URL}deleteData`, { _id: item }, { timeout: 200 }).then(function (response) {
+        await Axios.post(`${HOME_URL}deleteData`, { _id: item }, { timeout: 1200 }).then(function (response) {
             console.log(response);
         })
             .catch(function (error) {
