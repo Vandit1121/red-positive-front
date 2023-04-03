@@ -39,17 +39,19 @@ function Main() {
             refreshPage();
         },
     });
+    function removeData(check){
+        const tempData =  myData.filter((data) => {return (data!==check);});
+        setMyData(tempData);
+    }
+
 
     function addData(e) {
         const item = e.target.value;
-        console.log(item);
-        setMyData([...myData, myDetails[item]]);
+        myData.includes(myDetails[item])?removeData(myDetails[item]):setMyData([...myData, myDetails[item]]);
     }
 
     function filter() {
-        const unique = myData.filter((ele, index) => myData.indexOf(ele) === index);
-        console.log(unique);
-        sendMail(unique);
+        sendMail(myData);
     }
 
     const sendMail = async (content) => {
@@ -59,12 +61,12 @@ function Main() {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }, { timeout: 200 }).then(function (response) {
+        }).then(function (response) {
             console.log(response);
         })
-            .catch(function (error) {
-                console.log(error);
-            });
+        .catch(function (error) {
+            console.log(error);
+        });
         await res.json();
         refreshPage();
     }
@@ -88,10 +90,8 @@ function Main() {
             .catch(function (error) {
                 console.log(error);
             });
-        // console.log(errors);
         refreshPage();
     }
-    // refreshPage();
 
     const settingData = async (e) => {
         values.name = e.name;
